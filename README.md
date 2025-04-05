@@ -1,2 +1,2 @@
-# Foodman_17-02-24
-Learn to craft a stunning, responsive restaurant landing page from scratch with HTML, CSS, and JavaScript!
+# Tavolo-App
+Tavolo es una app que nos ayuda a poder optimizar el espacio de las cafeterias y de esa manera brindarle mas eficiencia de tiempo de espera a los clientes.
