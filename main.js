@@ -2,6 +2,44 @@ const menuBtn = document.getElementById("menu-btn");
 const navLinks = document.getElementById("nav-links");
 const menuBtnIcon = menuBtn.querySelector("i");
 
+// EmailJS initialization
+(function() {
+  // Inicializa EmailJS con tu clave pública COMPLETA
+  emailjs.init("ARWKRHe7J7IZFD_he"); // Reemplaza con la clave pública completa
+  
+  // Obtén el formulario de contacto
+  const contactForm = document.getElementById('contact-form');
+  
+  if (contactForm) {
+    contactForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      // Cambia el texto del botón mientras envía
+      const button = this.querySelector('button[type="submit"]');
+      const originalText = button.textContent;
+      button.textContent = "Enviando...";
+      button.disabled = true;
+      
+      // Envía el formulario usando EmailJS
+      emailjs.sendForm('service_jk7v4fg', 'template_q83gk49', this)
+        .then(function() {
+          // Mensaje de éxito
+          alert('¡Mensaje enviado con éxito!');
+          contactForm.reset();
+          button.textContent = originalText;
+          button.disabled = false;
+        }, function(error) {
+          // Mensaje de error
+          console.error('Error al enviar el mensaje:', error);
+          alert('Error al enviar el mensaje: ' + error.text);
+          button.textContent = originalText;
+          button.disabled = false;
+        });
+    });
+  }
+})();
+
+
 menuBtn.addEventListener("click", (e) => {
   navLinks.classList.toggle("open");
 
