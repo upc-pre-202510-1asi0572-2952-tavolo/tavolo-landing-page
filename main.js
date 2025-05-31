@@ -39,7 +39,71 @@ const menuBtnIcon = menuBtn.querySelector("i");
   }
 })();
 
-
+// Añadir este código a tu archivo main.js
+  document.addEventListener('DOMContentLoaded', function() {
+    const counters = document.querySelectorAll('.counter');
+    const speed = 200; // Cuanto más bajo, más rápido
+    
+    const startCounters = () => {
+      counters.forEach(counter => {
+        const updateCount = () => {
+          const target = parseInt(counter.getAttribute('data-target'));
+          const count = parseInt(counter.innerText);
+          
+          // Calcular incremento
+          let increment = Math.trunc(target / speed);
+          
+          // Si el incremento es demasiado pequeño
+          if (increment < 1) {
+            increment = 1;
+          }
+          
+          // Si aún no alcanzamos el objetivo
+          if (count < target) {
+            // Incrementar el contador
+            counter.innerText = count + increment;
+            // Repetir hasta alcanzar el objetivo
+            setTimeout(updateCount, 20);
+          } else {
+            counter.innerText = target;
+          }
+        };
+        
+        updateCount();
+      });
+    };
+    
+    // Iniciar contadores cuando están en el viewport
+    const statsSection = document.querySelector('.stats__container');
+    
+    // Función para comprobar si un elemento está en el viewport
+    function isInViewport(element) {
+      const rect = element.getBoundingClientRect();
+      return (
+        rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.bottom >= 0
+      );
+    }
+    
+    // Iniciar contadores cuando la sección está visible
+    function checkIfInView() {
+      if (isInViewport(statsSection)) {
+        startCounters();
+        window.removeEventListener('scroll', checkIfInView);
+      }
+    }
+    
+    // Verificar al cargar y al hacer scroll
+    window.addEventListener('scroll', checkIfInView);
+    checkIfInView();
+  });
+  
+  // Añadir animación de ScrollReveal
+  ScrollReveal().reveal(".stats__card", {
+    ...scrollRevealOption,
+    interval: 200,
+  });
+  
 menuBtn.addEventListener("click", (e) => {
   navLinks.classList.toggle("open");
 
