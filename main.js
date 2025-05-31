@@ -73,6 +73,36 @@ const menuBtnIcon = menuBtn.querySelector("i");
       });
     };
     
+    const swiper = new Swiper(".swiper", {
+  loop: true,
+  slidesPerView: 1,
+  spaceBetween: 30,
+  centeredSlides: true,
+  grabCursor: true,
+  // Eliminar o comentar el autoplay para que no sea automático
+  // autoplay: {
+  //   delay: 3500,
+  //   disableOnInteraction: false,
+  // },
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+  // Eliminar los breakpoints para que siempre muestre solo 1 tarjeta
+  // breakpoints: {
+  //   640: {
+  //     slidesPerView: 2,
+  //   },
+  //   992: {
+  //     slidesPerView: 3,
+  //   },
+  // }
+});
+    
     // Iniciar contadores cuando están en el viewport
     const statsSection = document.querySelector('.stats__container');
     
@@ -103,7 +133,7 @@ const menuBtnIcon = menuBtn.querySelector("i");
     ...scrollRevealOption,
     interval: 200,
   });
-  
+
 menuBtn.addEventListener("click", (e) => {
   navLinks.classList.toggle("open");
 
